@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta charset="utf-8">
+	<title>demo</title>
+	<link rel="stylesheet" href="D:\Chatbot\demo\node_modules\bootstrap\dist\css\bootstrap.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="D:\Chatbot\demo\node_modules\bootstrap\dist\js\bootstrap.min.js"></script>	
+<style>
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.bar {    float:left; padding: 5px;   margin:0 auto;}
+
+</style>
+
+</head>
+<body bgcolor="white">
+<script type="text/javascript" >
+var name1 = "";
+$.ajax({
+            url: '/pic',
+            type: 'get',
+            dataType: 'json',
+            success:function(data){
+                $('#text').html(data.data1._data);
+				name1 =  data.data1._data;
+				alert(data.data1._data);
+				alert(name1);
+            },
+            error:function(data){
+                alert('error');
+            }
+        });
+window.onload = function Test()
+{ 
+
+	for(var n = 0;n<2;n++)
+	{ 
+	var div = document.getElementById("test");
+	
+	var br = document.createElement("br");
+	div.appendChild(br);
+	
+	var div2 = document.createElement("label");
+	div2.innerText = name1;
+	div2.style.padding = "10"
+	div.appendChild(div2);	
+	
+	var div3 = document.createElement("img");
+	div3.width = "200";  //200个像素 不用加px   
+	div3.style.padding = "10"
+    div3.src = "bar.png";
+	div.appendChild(div3);
+	
+	var div4 = document.createElement("label");
+	div4.style.padding = "10"
+	div4.innerText = "9条";
+	div.appendChild(div4);
+	}
+
+}
+</script>
+
+<div id="test" style="height:50px; width:300px text-align:center;">
+</div>
+<div>
+
+
+
+</div>
+</body>
+</html>
