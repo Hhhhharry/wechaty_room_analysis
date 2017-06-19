@@ -55,7 +55,7 @@ bot
 	
 	membermessages.set(sender.name(),membermessages.get(sender.name()) + 1);
 	
-	if(room)
+	/*if(room)
 	{		
 	let DB_CONN_STR = 'mongodb://localhost:27017/wechaty'
 	let insertData = function(db,callback)
@@ -82,7 +82,7 @@ bot
         db.close();
     })
 	})
-	}
+	}*/
 	
 	
 	let membergender = new HashMap()
