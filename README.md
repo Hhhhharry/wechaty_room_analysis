@@ -15,9 +15,9 @@ Wechaty is a Bot Framework for Wechat **Personal** Account which can help you cr
 :book: <https://github.com/chatie/wechaty/wiki>  
 :whale: <https://hub.docker.com/r/zixia/wechaty>  
 
-#Wechaty 群分析统计机器人
+# Wechaty 群分析统计机器人
 
-##1.文字显示群分析结果
+## 1.文字显示群分析结果
 源码demo1.ts
 使用流程：
  - 用户在群里发送“群消息分析”
@@ -35,7 +35,8 @@ Wechaty is a Bot Framework for Wechat **Personal** Account which can help you cr
 - 通过wechaty提供 api 获取数据群成员名字、性别和地区，使用HashMap设置key为成员名字、性别和城市，统计数据value值加一，统计后“我”在群里面@用户统计结果
 - 群成员发送的消息会存在MongoDB中，MongoDB中name为Room.topic() + member.name() + 时间戳，时间戳是通过npm中的time-stamp获取，timestamp('YYYYMMDDHHmmssms')
 
-##2.图片显示群分析结果
+## 2.图片显示群分析结果
+
 源码demo.ts index.html
 使用流程：
  - 用户在群里发送“群消息分析”
@@ -90,6 +91,7 @@ Index.html中的script通过ajax获取/pic页面中的数据
 		await instance.exit();
 ```
 - 使用MediaMessage从当前路径发送phantom.js截取的图片
-###目前未调通的缺陷：显示页面的ajax不知道为什么始终收不到数据页面的数据。
+
+### 目前未调通的缺陷：显示页面的ajax不知道为什么始终收不到数据页面的数据。
 
 
