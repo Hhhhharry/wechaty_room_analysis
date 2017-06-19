@@ -24,9 +24,13 @@ Wechaty is a Bot Framework for Wechat **Personal** Account which can help you cr
  - “我” @用户并发送登录后群成员聊天条数的统计结果文字
  - 用户在群里发送“群成员分析”
  - “我”@用户发送统计群里的成员的城市和性别数量统计
+ 
 ![](1.jpg)
+
 ![](2.jpg)
+
 ![](3.jpg)
+
 方法：
 - 通过wechaty提供 api 获取数据群成员名字、性别和地区，使用HashMap设置key为成员名字、性别和城市，统计数据value值加一，统计后“我”在群里面@用户统计结果
 - 群成员发送的消息会存在MongoDB中，MongoDB中name为Room.topic() + member.name() + 时间戳，时间戳是通过npm中的time-stamp获取，timestamp('YYYYMMDDHHmmssms')
@@ -36,7 +40,9 @@ Wechaty is a Bot Framework for Wechat **Personal** Account which can help you cr
 使用流程：
  - 用户在群里发送“群消息分析”
  - “我” @用户并发送登录后群成员聊天条数的统计结果图表
+ 
  ![](4.jpg)
+ 
  方法：
 - 使用wechaty的API获得群成员所有的信息，并创建以群成员name为key的Hashmap对应的Value初始值为0，每当有成员发送消息value值加一。
 - 通过express创建一个显示页面（index.html）和数据页面(/pic)，代码如下：
