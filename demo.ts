@@ -10,6 +10,10 @@ const phantom = require('phantom')
 
 let flag = true
 let membermessages = new HashMap() 
+
+let messagesarry = [];
+
+
 const welcome = `
 =============== Powered by Wechaty ===============
 -------- https://github.com/wechaty/wechaty --------
@@ -45,15 +49,18 @@ bot
 	if(flag)
 	{
 	const memberlist = room.memberList()
-	for(x in memberlist)
 	
+	for(x in memberlist)
+	{
 		membermessages.set(memberlist[x].name(),0)
-		
+	}	
 	
 	flag = false;
 	}
 	
 	membermessages.set(sender.name(),membermessages.get(sender.name()) + 1);
+	
+	
 	
 	/*if(room)
 	{		
@@ -158,6 +165,39 @@ if((/^群消息分析$/i).test(content))
   Room.find({topic: room.topic()})
 	.then(croom => {
 		
+		
+		
+		
+		let mmessage = ''
+           croom.say('群消息统计:',sender)
+			membermessages.forEach(function (item, key) {
+				
+				mmessage += key + ' : ' + item + '条\n'
+				var add = {"name":key,"value":item};
+				messagesarry.push(add);
+			})       
+			croom.say(mmessage);
+			console.log(messagesarry);
+		
+		
+		sort_by = function(field, reverse, primer){         //定义排序方法  
+  
+		var key = primer ?  
+		function(x) {return primer(x[field])} :  
+		function(x) {return x[field]};  
+  
+		reverse = [-1, 1][+!!reverse];  
+  
+		return function (a, b) {  
+		return a = key(a), b = key(b), reverse * ((a > b) - (b < a));  
+		}   
+  
+		}  
+  
+		var messagesarrysort = messagesarry.sort(sort_by("value", false, parseInt));    
+		console.log(messagesarrysort);
+		
+		
 		var express = require('express');
 		var app = express();
 		app.use(express.static('public'));
@@ -165,15 +205,10 @@ if((/^群消息分析$/i).test(content))
 		 res.sendFile( __dirname + "/" + "index.html" );
 	
 		});
-		var mm;
-		
-		membermessages.forEach(function (item, key) {
-				
-				mm = key
-			})    
+	    
 		
 		app.get('/pic',function(req,res){
-            var data={  data1:membermessages
+            var data={  data1: messagesarry
             }
 		res.send(data);
 		});
@@ -185,19 +220,10 @@ if((/^群消息分析$/i).test(content))
 		var port = server.address().port;
 
 		console.log('Example app listening at http://%s:%s', host, port);
-		});
-		
-		
-		let mmessage = ''
-           croom.say('群消息统计:',sender)
-			/*membermessages.forEach(function (item, key) {
-				
-				mmessage += key + ' : ' + item + '条\n'
-			})       
-			croom.say(mmessage)*/
+		});	
         setTimeout(function() {
             
-			croom.say("http://192.168.1.102:3000")
+			croom.say("http://192.168.1.105:3000")
                    }, 1000);
 
 
@@ -208,18 +234,20 @@ if((/^群消息分析$/i).test(content))
 		const page = await instance.createPage();
 
 		await page.property('viewportSize', {width: 400, height: 480});
-		const status = await page.open('http://192.168.1.102:3000');
+		const status = await page.open('http://192.168.1.105:3000');
 		console.log(`Page opened with status [${status}].`);
 
 		await page.render('chat.jpg');
-		console.log(`File created at [./stackoverflow.jpg]`);
+		console.log(`File created at [./chat.jpg]`);
 		croom.say(new MediaMessage('chat.jpg'))
 	
 		await instance.exit();
 	}());
 			
 			
-                   }, 2000);				   
+                   }, 2000);	
+
+				   
 		})
 		
 		

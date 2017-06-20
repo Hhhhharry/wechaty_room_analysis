@@ -45,7 +45,7 @@ Wechaty is a Bot Framework for Wechat **Personal** Account which can help you cr
  ![](4.jpg)
  
  方法：
-- 使用wechaty的API获得群成员所有的信息，并创建以群成员name为key的Hashmap对应的Value初始值为0，每当有成员发送消息value值加一。
+- 使用wechaty的API获得群成员所有的信息，并创建以群成员name为key的arry对应的Value初始值为0，每当有成员发送消息value值加一。
 - 通过express创建一个显示页面（index.html）和数据页面(/pic)，代码如下：
 index.html
 ```sh	
@@ -67,10 +67,35 @@ Index.html中的script通过ajax获取/pic页面中的数据
             type: 'get',
             dataType: 'json',
             success:function(data){
-                $('#text').html(data.data1._data);
-				name1 =  data.data1._data;
-				alert(data.data1._data);
-				alert(name1);
+                
+				
+		for(var n = 0;n<data.data1.length;n++)
+		{ 
+		
+		
+		
+		var br = document.createElement("br");
+		 $("#test").append(br);
+		
+		var div2 = document.createElement("label");
+		div2.innerText = data.data1[n].name;
+		div2.style.padding = "10"
+		$("#test").append(div2);	
+	
+		var div3 = document.createElement("img");
+		div3.width = "200";  //200个像素 不用加px   
+		div3.style.padding = "10"
+		div3.src = "bar.png";
+		$("#test").append(div3);
+	
+		var div4 = document.createElement("label");
+		div4.style.padding = "10"
+		div4.innerText = data.data1[n].value;
+		$("#test").append(div4);
+		}
+				
+				
+			
             },
             error:function(data){
                 alert('error');
@@ -87,11 +112,11 @@ Index.html中的script通过ajax获取/pic页面中的数据
 		const status = await page.open('http://192.168.1.102:3000');
 		console.log(`Page opened with status [${status}].`);
 		await page.render('chat.jpg');
-		console.log(`File created at [./stackoverflow.jpg]`);
+		console.log(`File created at [./chat.jpg]`);
 		await instance.exit();
 ```
 - 使用MediaMessage从当前路径发送phantom.js截取的图片
 
-### 目前未调通的缺陷：显示页面的ajax不知道为什么始终收不到数据页面的数据。
+
 
 
