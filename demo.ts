@@ -21,6 +21,32 @@ Hello`
 console.log(welcome)
 const bot = Wechaty.instance({ profile: Config.DEFAULT_PROFILE })
 
+
+var express = require('express');
+		var app = express();
+		app.use(express.static('public'));
+		app.get('/', function (req, res) {
+		 res.sendFile( __dirname + "/" + "index.html" );
+	
+		});
+	    
+		
+		app.get('/pic',function(req,res){
+            var data={  data1: messagesarry
+            }
+		res.send(data);
+		});
+		
+		
+		
+		var server = app.listen(3000, function () {
+		var host = server.address().address;
+		var port = server.address().port;
+
+		console.log('Example app listening at http://%s:%s', host, port);
+		});	
+
+
 bot
 .on('scan', (url, code)=>{
     let loginUrl = url.replace('qrcode', 'l')
@@ -198,13 +224,7 @@ if((/^群消息分析$/i).test(content))
 		console.log(messagesarrysort);
 		
 		
-		var express = require('express');
-		var app = express();
-		app.use(express.static('public'));
-		app.get('/', function (req, res) {
-		 res.sendFile( __dirname + "/" + "index.html" );
-	
-		});
+		
 	    
 		
 		app.get('/pic',function(req,res){
@@ -213,17 +233,12 @@ if((/^群消息分析$/i).test(content))
 		res.send(data);
 		});
 		
+	
 		
-		
-		var server = app.listen(3000, function () {
-		var host = server.address().address;
-		var port = server.address().port;
-
-		console.log('Example app listening at http://%s:%s', host, port);
-		});	
+			
         setTimeout(function() {
             
-			croom.say("http://192.168.1.105:3000")
+			croom.say("http://192.168.1.105:3000/")
                    }, 1000);
 
 
@@ -234,7 +249,7 @@ if((/^群消息分析$/i).test(content))
 		const page = await instance.createPage();
 
 		await page.property('viewportSize', {width: 400, height: 480});
-		const status = await page.open('http://192.168.1.105:3000');
+		const status = await page.open('http://192.168.1.105:3000/');
 		console.log(`Page opened with status [${status}].`);
 
 		await page.render('chat.jpg');
@@ -250,6 +265,7 @@ if((/^群消息分析$/i).test(content))
 				   
 		})
 		
+		messagesarry = [];
 		
 		
   }
